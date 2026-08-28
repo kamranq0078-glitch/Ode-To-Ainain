@@ -1,0 +1,304 @@
+/* Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #2c1e16; /* Warm dark wood/ambient color */
+  font-family: 'Cormorant Garamond', serif;
+  color: #3b2a22; /* Dark sepia text */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Ambient Effects */
+.ambient-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100vw;
+  height: 100vh;
+  background: radial-gradient(circle at 50% 50%, rgba(218, 165, 108, 0.15) 0%, rgba(44, 30, 22, 1) 80%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.noise-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 100;
+  mix-blend-mode: multiply;
+}
+
+/* Book Container */
+.book-container {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 900px; /* Two page spread max width */
+  padding: 20px;
+}
+
+/* Page Styling */
+.page {
+  background-color: #fdf6e3;
+  /* Parchment gradient */
+  background-image: 
+    radial-gradient(circle at center, transparent 40%, rgba(180, 140, 100, 0.1) 100%),
+    linear-gradient(to right, rgba(0,0,0,0.05) 0%, transparent 5%, transparent 95%, rgba(0,0,0,0.05) 100%);
+  box-shadow: inset 0 0 30px rgba(180, 140, 100, 0.2), 0 5px 15px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  position: relative;
+}
+
+.page-content {
+  width: 100%;
+  height: 100%;
+  padding: 20px 25px; /* Less padding to give more room */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Prevents top cutoff when content overflows */
+  align-items: center; /* Center text horizontally */
+  position: relative;
+  font-size: 1rem; /* Smaller font to fit scaled screens */
+  line-height: 1.5;
+  text-align: center;
+  overflow-y: auto; /* Allow scrolling if it still overflows */
+}
+
+/* Inner wrapper to help vertical centering safely */
+.page-content::before,
+.page-content::after {
+  content: "";
+  flex: 1; /* Pushes content to center, but allows flex-start if overflowing */
+}
+
+/* Hardcover styling */
+.page-cover {
+  background-color: #5a2e2e; /* Deep maroon/red */
+  background-image: 
+    linear-gradient(45deg, rgba(0,0,0,0.4) 0%, transparent 40%),
+    linear-gradient(to right, rgba(0,0,0,0.6) 0%, transparent 10%, transparent 90%, rgba(0,0,0,0.3) 100%);
+  color: #d4af37; /* Gold */
+}
+
+.cover-content {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.cover-content h1 {
+  font-size: 4rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+  font-style: italic;
+}
+
+.subtitle {
+  font-size: 1.3rem;
+  font-style: italic;
+  opacity: 0.9;
+  max-width: 80%;
+  line-height: 1.5;
+  margin-bottom: 30px;
+}
+
+.dedication {
+  font-size: 1.5rem;
+  margin-top: 20px;
+}
+
+.cover-note {
+  position: absolute;
+  bottom: 25px;
+  right: 30px;
+  font-size: 1rem;
+  font-style: italic;
+  opacity: 0.7;
+  transform: rotate(-3deg);
+}
+
+.back-cover-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.ornament {
+  font-size: 3rem;
+  color: #d4af37;
+  opacity: 0.6;
+}
+
+/* Typography elements */
+p {
+  margin-bottom: 12px;
+  width: 100%;
+  word-break: normal;
+  overflow-wrap: normal;
+  hyphens: none;
+  flex-shrink: 0;
+}
+
+strong {
+  font-weight: 600;
+}
+
+em {
+  font-style: italic;
+}
+
+.urdu {
+  font-family: 'Noto Nastaliq Urdu', serif;
+  font-size: 1.25rem;
+  line-height: 2;
+  text-align: center;
+  color: #2a1b14;
+  margin: 15px 0 10px 0;
+  flex-shrink: 0;
+}
+
+.translation {
+  font-style: italic;
+  text-align: center;
+  font-size: 0.95rem;
+  opacity: 0.8;
+  margin-bottom: 15px;
+  flex-shrink: 0;
+}
+
+.footnote {
+  font-size: 0.9rem;
+  font-style: italic;
+  opacity: 0.6;
+  margin-top: auto;
+  text-align: center;
+}
+
+.page-number {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 0.9rem;
+  opacity: 0.5;
+}
+
+/* Final Page Elements */
+.final-page {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  justify-content: flex-start; /* Flow from top to fit everything */
+  font-size: 1rem; /* Smaller font to fit text */
+  line-height: 1.5;
+}
+
+.final-page p {
+  margin-bottom: 10px;
+}
+
+.final-page .urdu {
+  margin: 10px 0 5px 0;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.final-page .translation {
+  margin-bottom: 10px;
+  font-size: 0.9rem;
+}
+
+.photo-container {
+  position: relative;
+  display: inline-block;
+  margin: 0 auto 15px auto;
+  padding: 6px 6px 20px 6px;
+  background-color: #fffaf0;
+  box-shadow: 2px 4px 15px rgba(0,0,0,0.2);
+  transform: rotate(-2deg);
+  border: 1px solid rgba(0,0,0,0.05);
+}
+
+.polaroid-photo {
+  height: 160px; /* Constrained height */
+  width: auto;
+  display: block;
+  filter: sepia(0.2) contrast(1.1);
+}
+
+.signature {
+  text-align: right;
+  font-size: 1.2rem;
+  font-style: italic;
+  margin-top: 15px;
+  width: 100%;
+}
+
+/* Play Button */
+.hidden-btn {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  width: 30px;
+  height: 30px;
+  color: #5a2e2e;
+  cursor: pointer;
+  opacity: 0.3;
+  transition: opacity 0.3s ease;
+}
+
+.hidden-btn:hover {
+  opacity: 0.8;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .page-content {
+    padding: 25px 20px;
+    font-size: 1.1rem;
+  }
+  
+  .cover-content h1 {
+    font-size: 3rem;
+  }
+  
+  .urdu {
+    font-size: 1.2rem;
+    line-height: 2;
+  }
+  
+  .photo-container {
+    width: 90%;
+    margin-bottom: 20px;
+  }
+}
+
+/* page-flip utility classes */
+.--left .page-content {
+  border-right: 1px solid rgba(0,0,0,0.1);
+}
+.--right .page-content {
+  border-left: 1px solid rgba(0,0,0,0.1);
+}
