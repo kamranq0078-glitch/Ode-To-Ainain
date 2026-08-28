@@ -276,22 +276,31 @@ em {
 /* Responsive adjustments */
 @media (max-width: 600px) {
   .page-content {
-    padding: 25px 20px;
-    font-size: 1.1rem;
+    padding: 15px 15px;
+    font-size: 0.9rem;
   }
   
   .cover-content h1 {
-    font-size: 3rem;
+    font-size: 2.5rem;
   }
   
   .urdu {
-    font-size: 1.2rem;
-    line-height: 2;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin: 10px 0 8px 0;
+  }
+  
+  .final-page {
+    font-size: 0.85rem;
   }
   
   .photo-container {
-    width: 90%;
-    margin-bottom: 20px;
+    padding: 4px 4px 15px 4px;
+    margin-bottom: 10px;
+  }
+
+  .polaroid-photo {
+    height: 130px;
   }
 }
 
